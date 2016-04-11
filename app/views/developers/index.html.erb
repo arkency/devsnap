@@ -3,21 +3,16 @@
 <center><h1> <%= @developers.count %> Awesome Devs on Snapchat...and counting!</h1></center>
 
 <table>
-  <thead>
-    <tr>
-      <th>Login</th>
-      <th>Full name</th>
-      <th>About</th>
-    </tr>
-  </thead>
-
   <tbody>
     <% @developers.each do |developer| %>
-      <tr>
-        <td><%= link_to developer.login, "http://snapchat.com/add/#{developer.login}" %></a></td>
-        <td><%= developer.full_name %></td>
-        <td><%= developer.about %></td>
-      </tr>
+    <tr>
+      <td>
+        <%= image_tag "https://feelinsonice-hrd.appspot.com/web/deeplink/snapcode?username=#{developer.login}&type=SVG", width: 100, height: 100 %>
+        <div class="centered"><%= link_to developer.login, "http://snapchat.com/add/#{developer.login}" %></a></div>
+        <div class="centered"><%= developer.full_name %></div>
+      </td>
+      <td><%= developer.about %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>
@@ -28,3 +23,9 @@
 
 <br>
 <%= link_to 'New Developer', new_developer_path %>
+
+<style>
+  .centered {
+  text-align: center;
+  }
+</style>
