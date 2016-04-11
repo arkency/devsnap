@@ -1,0 +1,11 @@
+@import "bootstrap";
+@rails_bootstrap_forms;
+
+body { 
+	padding: 10px 20px 10px 20px;
+}
+
+#login_id {
+	text-decoration: underline;
+	cursor: pointer;
+}
