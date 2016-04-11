@@ -5,7 +5,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Login</th>
+      <th>Snapchat username</th>
       <th>Full name</th>
       <th>About</th>
     </tr>
@@ -14,7 +14,7 @@
   <tbody>
     <% @developers.each do |developer| %>
       <tr>
-        <td data-toggle="modal" data-target="#snapmodal<%= developer.id %>" ><span id="login_id"><%= developer.login %></span></td>
+        <td data-toggle="modal" data-target="#snapmodal<%= developer.id %>" ><span id="snapchat_username"><%= developer.snapchat_username %></span></td>
         <td><%= developer.full_name %></td>
         <td><%= developer.about %></td>
       </tr>
@@ -27,8 +27,8 @@
               <center><h4 class="blockquote-footer"><%= developer.about %></h4></center>
             </div>
             <center><div class="modal-body">
-              <%= image_tag("https://feelinsonice-hrd.appspot.com/web/deeplink/snapcode?username=#{ developer.login }&type=PNG") %>
-              <h2><%= developer.login %></h2>
+              <%= image_tag("https://feelinsonice-hrd.appspot.com/web/deeplink/snapcode?username=#{ developer.snapchat_username }&type=PNG") %>
+              <h2><%= developer.snapchat_username %></h2>
             </div></center>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

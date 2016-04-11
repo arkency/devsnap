@@ -1,3 +1,3 @@
 class Developer < ApplicationRecord
-  validates :login, :full_name, :about, presence: true
+  validates :snapchat_username, :full_name, :about, presence: true
 end
