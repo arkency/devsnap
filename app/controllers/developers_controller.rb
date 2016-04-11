@@ -3,7 +3,7 @@ class DevelopersController < ApplicationController
 
   def index
     #@developers = Developer.all
-    @developers = Developer.paginate(:page => params[:page], :per_page => 10)
+    @developers = Developer.paginate(page: params[:page], per_page: 10)
   end
 
   def new
