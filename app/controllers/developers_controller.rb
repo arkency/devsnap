@@ -14,7 +14,7 @@ class DevelopersController < ApplicationController
 
     respond_to do |format|
       if @developer.save
-        format.html { redirect_to @developer, notice: 'Developer was successfully created.' }
+        format.html { redirect_to developers_path, notice: 'Developer was successfully created.' }
       else
         format.html { render :new }
       end
