@@ -14,7 +14,7 @@
   <tbody>
     <% @developers.each do |developer| %>
       <tr>
-        <td><%= developer.login %></td>
+        <td><%= link_to developer.login, "http://snapchat.com/add/#{developer.login}" %></a></td>
         <td><%= developer.full_name %></td>
         <td><%= developer.about %></td>
       </tr>
