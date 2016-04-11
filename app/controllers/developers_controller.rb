@@ -2,8 +2,7 @@ class DevelopersController < ApplicationController
   before_action :set_developer, only: [:show, :edit, :update, :destroy]
 
   def index
-    #@developers = Developer.all
-    @developers = Developer.paginate(page: params[:page], per_page: 10)
+    @developers = Developer.paginate(page: params[:page], per_page: 9)
   end
 
   def new
@@ -15,7 +14,7 @@ class DevelopersController < ApplicationController
 
     respond_to do |format|
       if @developer.save
-        format.html { redirect_to developers_path, notice: 'Developer was successfully created.' }
+        format.html { redirect_to developers_path, notice: 'You\'ve been successfully added to our growing list of devs.' }
       else
         format.html { render :new }
       end

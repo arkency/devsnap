@@ -22,6 +22,8 @@ gem 'turbolinks', '~> 5.x'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 gem 'will_paginate', '~> 3.1'
+gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'bootstrap_form', '~> 2.3'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

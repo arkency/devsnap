@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<center><h1> <%= @developers.count %> Awesome Devs on Snapchat...and counting!</h1></center>
+<center><h2> <%= @developers.count %> Awesome Devs on Snapchat...and counting!</h2></center>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Login</th>
@@ -14,17 +14,39 @@
   <tbody>
     <% @developers.each do |developer| %>
       <tr>
-        <td><%= link_to developer.login, "http://snapchat.com/add/#{developer.login}" %></a></td>
+        <td data-toggle="modal" data-target="#snapmodal<%= developer.id %>" ><span id="login_id"><%= developer.login %></span></td>
         <td><%= developer.full_name %></td>
         <td><%= developer.about %></td>
       </tr>
+
+      <div class="modal fade" id="snapmodal<%= developer.id %>" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <center><h1><%= developer.full_name %></h1></center>
+              <center><h4 class="blockquote-footer"><%= developer.about %></h4></center>
+            </div>
+            <center><div class="modal-body">
+              <%= image_tag("https://feelinsonice-hrd.appspot.com/web/deeplink/snapcode?username=#{ developer.login }&type=PNG") %>
+              <h2><%= developer.login %></h2>
+            </div></center>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
     <% end %>
+
+    
+
   </tbody>
 </table>
 
-<br>
+<%= link_to 'New Developer', new_developer_path, class: "btn btn-primary" %>
 
-<%= will_paginate @developers %>
 
-<br>
-<%= link_to 'New Developer', new_developer_path %>
+<center><%= will_paginate @developers %></center>
+
+

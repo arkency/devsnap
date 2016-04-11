@@ -39,6 +39,12 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.0.0)
+    autoprefixer-rails (6.3.5)
+      execjs
+    bootstrap (4.0.0.alpha3)
+      autoprefixer-rails (>= 6.0.3)
+      sass (>= 3.4.19)
+    bootstrap_form (2.3.0)
     builder (3.2.2)
     byebug (8.2.4)
     coffee-rails (4.1.1)
@@ -163,6 +169,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap (~> 4.0.0.alpha3)
+  bootstrap_form (~> 2.3)
   byebug
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
