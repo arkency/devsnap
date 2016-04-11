@@ -1,6 +1,4 @@
 class DevelopersController < ApplicationController
-  before_action :set_developer, only: [:show, :edit, :update, :destroy]
-
   def index
     @developers = Developer.paginate(page: params[:page], per_page: 9)
   end
@@ -21,12 +19,7 @@ class DevelopersController < ApplicationController
     end
   end
 
-
   private
-    def set_developer
-      @developer = Developer.find(params[:id])
-    end
-
     def developer_params
       params.require(:developer).permit(:login, :full_name, :about)
     end
