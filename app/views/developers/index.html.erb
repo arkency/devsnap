@@ -38,13 +38,11 @@
         </div>
       </div>
     <% end %>
-
-    
-
   </tbody>
 </table>
 
 <%= link_to 'New Developer', new_developer_path, class: "btn btn-primary" %>
+<%= link_to 'Oh, just show me the codes!', codes_index_path %>
 
 
 <center><%= will_paginate @developers %></center>
