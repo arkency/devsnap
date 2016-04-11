@@ -2,7 +2,8 @@ class DevelopersController < ApplicationController
   before_action :set_developer, only: [:show, :edit, :update, :destroy]
 
   def index
-    @developers = Developer.all
+    #@developers = Developer.all
+    @developers = Developer.paginate(:page => params[:page], :per_page => 10)
   end
 
   def new
