@@ -21,6 +21,9 @@ class DevelopersController < ApplicationController
     end
   end
 
+  def codes_index
+    @developers = Developer.from_newest
+  end
 
   private
     def set_developer
