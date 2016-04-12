@@ -1,7 +1,4 @@
 <p id="notice"><%= notice %></p>
-
-<center><h2> <%= @developers.count %> Awesome Devs on Snapchat...and counting!</h2></center>
-
 <table class="table table-striped">
   <thead>
     <tr>
@@ -44,3 +41,4 @@
 <%= link_to 'I want to be a part of this!', new_developer_path, class: "btn btn-primary" %>
 
 <center><%= will_paginate @developers %></center>
+
