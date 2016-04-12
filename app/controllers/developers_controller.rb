@@ -19,10 +19,6 @@ class DevelopersController < ApplicationController
     end
   end
 
-  def codes_index
-    @developers = Developer.from_newest
-  end
-
   private
     def developer_params
       params.require(:developer).permit(:snapchat_username, :full_name, :about)
