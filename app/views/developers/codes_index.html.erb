@@ -1,0 +1,12 @@
+<div class=".container-fluid">
+  <% @developers.each_slice(4) do |batch| %>
+    <div class="row">
+      <% batch.each do |developer| %>
+        <div class="col-md-3">
+          <%= image_tag("https://feelinsonice-hrd.appspot.com/web/deeplink/snapcode?username=#{ developer.login }&type=PNG") %>
+          <p><%= developer.login %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
