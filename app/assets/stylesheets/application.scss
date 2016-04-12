@@ -7,6 +7,12 @@ body {
 	font-weight: normal;
 }
 
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 #snapchat_username {
 	text-decoration: underline;
 	cursor: pointer;
@@ -26,12 +32,14 @@ body {
 }
 
 img {
-  max-width: 100%;
+  max-width: 95%;
+  max-width: calc(100% - 1px);
   vertical-align: middle;
   display: inline-block;
 }
 
 .ghost-element {
+  margin-right: -4px;
   display: inline-block;
   height: 100%;
   vertical-align: middle;
