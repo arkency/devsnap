@@ -24,3 +24,27 @@ body {
 .container {
 	width: 550px;
 }
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.ghost-element {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.image-box {
+  text-align: center;
+  height: 100vh;
+  min-height: 360px;
+}
+
+@media screen and (min-width: 545px) {
+  .image-box {
+    height: auto;
+  }
+}
