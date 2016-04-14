@@ -17,7 +17,7 @@
           </span>
         </td>
         <td><%= developer.full_name %></td>
-        <td><%= developer.about %></td>
+        <td><%= developer.about.truncate(90, separator: ' ') %></td>
       </tr>
 
       <div class="modal fade" id="snapmodal<%= developer.id %>">

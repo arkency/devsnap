@@ -15,6 +15,7 @@ gem 'bootstrap_form', '~> 2.3'
 gem "rspec-rails", "3.5.0.beta1"
 gem 'rails-controller-testing', '~> 0.0.3'
 gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
+gem 'faker', '~> 1.6', '>= 1.6.3'
 
 group :development, :test do
   gem 'byebug'
