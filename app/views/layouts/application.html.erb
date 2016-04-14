@@ -4,14 +4,14 @@
     <title>DevSnap</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
 
     <%= favicon_link_tag 'favicon.ico' %>
   </head>
-
   <body>
+    <%= render "shared/header" %>
     <%= yield %>
   </body>
+    <%= render "shared/footer" %>
 </html>

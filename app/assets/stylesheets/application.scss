@@ -1,10 +1,21 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
 @import "bootstrap";
 
 body { 
-	padding: 10px 20px 10px 20px;
+	padding: 55px 20px 50px 20px;
+	font-family: 'Raleway', arial;
 }
 
 #snapchat_username {
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+.padding_top {
+	padding-top: 20px;
+}
+
+.heading {
+	padding-left: 20px;
+	padding-right: 20px;
 }
