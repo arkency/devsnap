@@ -11,12 +11,16 @@
   <tbody>
     <% @developers.each do |developer| %>
       <tr>
-        <td data-toggle="modal" data-target="#snapmodal<%= developer.id %>" ><span id="snapchat_username"><%= developer.snapchat_username %></span></td>
+        <td data-toggle="modal" data-target="#snapmodal<%= developer.id %>" >
+          <span id="snapchat_username">
+            <%= developer.snapchat_username %>
+          </span>
+        </td>
         <td><%= developer.full_name %></td>
         <td><%= developer.about %></td>
       </tr>
 
-      <div class="modal fade" id="snapmodal<%= developer.id %>" role="dialog">
+      <div class="modal fade" id="snapmodal<%= developer.id %>">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -28,7 +32,7 @@
               <h2><%= developer.snapchat_username %></h2>
             </div></center>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger-outline" data-dismiss="modal">Close</button>
             </div>
           </div>
           </div>
@@ -38,7 +42,7 @@
   </tbody>
 </table>
 
-<%= link_to 'I want to be a part of this!', new_developer_path, class: "btn btn-primary" %>
+<%= link_to 'I want to be a part of this!', new_developer_path, class: "btn btn-primary-outline" %>
 
 <center><%= will_paginate @developers %></center>
 
