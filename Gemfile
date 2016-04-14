@@ -12,8 +12,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'will_paginate', '~> 3.1'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'bootstrap_form', '~> 2.3'
-#gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
 gem "rspec-rails", "3.5.0.beta1"
+gem 'rails-controller-testing', '~> 0.0.3'
+gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
 
 group :development, :test do
   gem 'byebug'
