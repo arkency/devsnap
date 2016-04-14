@@ -1,6 +1,6 @@
 class DevelopersController < ApplicationController
   def index
-    @developers = Developer.paginate(page: params[:page], per_page: 8).from_newest
+    @developers = Developer.paginate(page: params[:page], per_page: 8)
   end
 
   def new
@@ -12,7 +12,7 @@ class DevelopersController < ApplicationController
 
     respond_to do |format|
       if @developer.save
-        format.html { redirect_to developers_path, notice: 'You\'ve been successfully added to our growing list of devs.' }
+        format.html { redirect_to developers_path, notice: '👻 You\'ve been successfully added to our growing list of devs on Snapchat.' }
       else
         format.html { render :new }
       end
