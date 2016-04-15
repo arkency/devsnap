@@ -12,7 +12,7 @@ class DevelopersController < ApplicationController
 
     respond_to do |format|
       if @developer.save
-        format.html { redirect_to developers_path, notice: '👻 You\'ve been successfully added to our growing list of devs on Snapchat.' }
+        format.html { redirect_to developers_path, notice: 'You\'ve been successfully added to our growing list of devs on Snapchat.' }
       else
         format.html { render :new }
       end
