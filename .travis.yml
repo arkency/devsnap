@@ -1,6 +1,10 @@
 language: ruby
 rvm:
-- 2.3.0
+  - 2.3.0
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database devsnap_test;' -U postgres
 addons:
   code_climate:
     repo_token:
