@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'codeclimate-test-reporter', group: :test, require: nil
 
 gem 'rails', '>= 5.0.0.beta3', '< 5.1'
 gem 'pg'
