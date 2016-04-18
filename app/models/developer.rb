@@ -10,7 +10,7 @@ class Developer < ApplicationRecord
 
   private
 	def get_svg
-		download_image = Nokogiri::XML open("https://feelinsonice-hrd.appspot.com/web/deeplink/snapcode?username=#{ self.username }&type=SVG")
-		self.snapcode_image = download_image.to_html
+		image = Nokogiri::XML open("https://feelinsonice-hrd.appspot.com/web/deeplink/snapcode?username=#{ self.snapchat_username }&type=SVG")
+		self.snapcode_image = image.to_html
 	end
 end

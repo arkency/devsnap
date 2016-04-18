@@ -28,7 +28,11 @@
               <center><h4 class="blockquote-footer"><%= developer.about %></h4></center>
             </div>
             <center><div class="modal-body">
-              <%= image_tag("https://feelinsonice-hrd.appspot.com/web/deeplink/snapcode?username=#{ developer.snapchat_username }&type=PNG") %>
+              <% if developer.snapcode_image? %>
+                <%= render inline: "#{developer.snapcode_image}" %>
+              <% else %>
+                <%= image_tag("https://feelinsonice-hrd.appspot.com/web/deeplink/snapcode?username=#{ developer.snapchat_username }&type=PNG") %>
+              <% end %>
               <h2><%= developer.snapchat_username %></h2>
             </div></center>
             <div class="modal-footer">
