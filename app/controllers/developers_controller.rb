@@ -1,6 +1,6 @@
 class DevelopersController < ApplicationController
   def index
-    @developers = Developer.paginate(page: params[:page], per_page: 8)
+    @developers = Developer.paginate(page: params[:page], per_page: 8).order(created_at: :asc)
   end
 
   def new
