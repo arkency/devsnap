@@ -33,5 +33,4 @@ RSpec.describe DevelopersController, type: :controller do
 		end
 	end
 
-	# TODO: Finish up writing tests
 end
