@@ -23,15 +23,25 @@ body {
 }
 
 .heading {
-	padding-left: 20px;
-	padding-right: 20px;
+  padding: 0.5rem 1rem;
+  background-color: #f7f7f9;
+  text-align: center;
+}
+
+.heading .navbar-brand {
+  display: block;
+  float: none;
 }
 
 .container {
 	width: 550px;
 }
 
-img {
+.heading ul {
+  display: none;
+}
+
+.image-box svg, .image-box img {
   max-width: 95%;
   max-width: calc(100% - 1px);
   vertical-align: middle;
@@ -47,12 +57,27 @@ img {
 
 .image-box {
   text-align: center;
-  height: 100vh;
+  height: calc(100vh - 100px);
   min-height: 360px;
 }
 
 @media screen and (min-width: 545px) {
   .image-box {
     height: auto;
+  }
+
+  .heading .navbar-brand {
+    display: inline;
+    float: left;
+  }
+
+  .heading {
+    background-color: #ffffff;
+    text-align: left;
+    float: left;
+  }
+
+  .heading ul {
+    display: block;
   }
 }
