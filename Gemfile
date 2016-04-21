@@ -13,7 +13,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'will_paginate', '~> 3.1'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'bootstrap_form', '~> 2.3'
-gem "rspec-rails", "3.5.0.beta1"
+gem 'rspec-rails', '3.5.0.beta1'
 gem 'rails-controller-testing', '~> 0.0.3'
 gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
 
@@ -31,4 +31,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rails_12factor', group: :production
 
-ruby "2.3.0"
+ruby '2.3.0'

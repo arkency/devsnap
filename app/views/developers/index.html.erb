@@ -29,7 +29,7 @@
             </div>
             <center><div class="modal-body">
               <% if developer.snapcode_image? %>
-                <%= render inline: "#{developer.snapcode_image}" %>
+                <%= render inline: "#{ developer.snapcode_image }" %>
               <% else %>
                 <%= image_tag("https://feelinsonice-hrd.appspot.com/web/deeplink/snapcode?username=#{ developer.snapchat_username }&type=PNG") %>
               <% end %>
