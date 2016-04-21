@@ -1,21 +1,17 @@
-require 'nokogiri'
-require 'open-uri'
 
+require_relative '../services/snapchat_svg_service'
 class Developer < ApplicationRecord
-	before_save :svg_image
+	include SnapchatSvgService
+	before_save :get_svg_image
 
   validates :snapchat_username, :full_name, :about, presence: true
   validates :snapchat_username, uniqueness: { message: "is already in this directory."}
   scope :from_newest, -> { order('created_at DESC') }
-  
+
   private
 
-  def get_svg_image(url)
-		image = Nokogiri::XML open(url)
-		self.snapcode_image = image.to_html
-	end
-
-	def svg_image
-		get_svg_image("https://feelinsonice-hrd.appspot.com/web/deeplink/snapcode?username=#{ self.snapchat_username }&type=SVG")
+  def get_svg_image
+		svg = SnapchatSvgService.get_svg_image("#{ self.snapchat_username }")
+		self.snapcode_image = svg
 	end
 end
