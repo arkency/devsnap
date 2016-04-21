@@ -8,7 +8,7 @@ class Developer < ApplicationRecord
   private
 
   def get_svg_image
-		self.snapcode_image = SnapchatSvgService.get_svg_image("#{ self.snapchat_username }")
+		self.snapcode_image = SnapchatService.get_svg_image("#{ self.snapchat_username }")
 	end
 
 	def remove_whitespace
