@@ -11,20 +11,23 @@
     </div>
   <% end %>
 
+<div class="container card card-block">
   <div class="field">
-    <%= f.text_field :snapchat_username %>
+    <%= f.text_field :snapchat_username, placeholder: "anakin_skywalker"%>
   </div>
 
   <div class="field">
-    <%= f.text_field :full_name %>
+    <%= f.text_field :full_name, placeholder: "Han Solo" %>
   </div>
 
   <div class="field">
-    <%= f.text_area :about %>
+    <%= f.text_area :about, placeholder: "Anything that best describes you as a developer. Give your best shot." %>
   </div>
 
   <div class="actions">
     <span style="padding-right: 20px;"><%= f.submit "OK. Add me!", class: "btn btn-primary-outline" %></span>
     <%= link_to 'No, take me back.', developers_path %>
   </div>
+</div>
 <% end %>
+
