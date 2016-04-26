@@ -20,7 +20,8 @@ class DevelopersController < ApplicationController
   end
 
   private
-    def developer_params
-      params.require(:developer).permit(:snapchat_username, :full_name, :about)
-    end
+  
+  def developer_params
+    params.require(:developer).permit(:snapchat_username, :full_name, :about)
+  end
 end
