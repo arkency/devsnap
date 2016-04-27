@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <div class="row">
+    <% @developers.each do |developer| %>
+      <%
+        hue = rand(360)
+        style = "filter: hue-rotate(#{hue}deg);-webkit-filter: hue-rotate(#{hue}deg);"
+      %>
+      <div class="image-box col-lg-3 col-md-4 col-sm-6 col-xs-12" style="<%= style %>">
+        <div class="ghost-element"></div>
+          <% if developer.snapcode_image? %>
+            <%= render inline: "#{developer.snapcode_image}" %>
+          <% else %>
+            <%= image_tag("https://feelinsonice-hrd.appspot.com/web/deeplink/snapcode?username=#{ developer.snapchat_username }&type=PNG") %>
+          <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
