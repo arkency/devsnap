@@ -5,6 +5,10 @@ class Developer < ApplicationRecord
   validates :snapchat_username, uniqueness: { message: "is already in this directory."}
   scope :from_newest, -> { order('created_at DESC') }
 
+  def self.search(search)
+    where("full_name || about LIKE?", "%#{search}%")
+  end
+
   private
 
   def get_svg_image
