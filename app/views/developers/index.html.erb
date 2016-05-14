@@ -1,11 +1,10 @@
-<%= form_tag(developers_path, :method => "get", id: "search-form") do %>
-<%= text_field_tag :search, params[:search], placeholder: "Lookup a dev..." %>
-<%= submit_tag "Search" %>
-<% end %>
-
 <h5><span id="notice" class="label label-success"><%= notice %></span></h5>
 
-<%= render "developer" %>
+<% if @developers.present? %>
+  <%= render 'developer' %>
+<% else %>
+  <%= render 'dev_not_found' %>
+<% end %>
 
 <%= link_to 'I want to be a part of this!', new_developer_path, class: "btn btn-primary-outline" %>
 <%= link_to 'Oh, just show me the codes!', codes_index_path, class: "btn btn-primary-outline" %>

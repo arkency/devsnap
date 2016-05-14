@@ -1,6 +1,5 @@
 class DevelopersController < ApplicationController
   def index
-    #@developers = Developer.paginate(page: params[:page], per_page: 8).order(id: :asc)
     if params[:search]
       @developers = Developer.search(params[:search]).order('created_at ASC')
     else

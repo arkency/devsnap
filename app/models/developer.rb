@@ -6,7 +6,7 @@ class Developer < ApplicationRecord
   scope :from_newest, -> { order('created_at DESC') }
 
   def self.search(search)
-    where("full_name || about LIKE?", "%#{search}%")
+    where("full_name || about || snapchat_username LIKE?", "%#{search}%")
   end
 
   private
