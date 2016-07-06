@@ -25,7 +25,5 @@ export default function() {
 
   this.namespace = 'api/v1';
 
-  this.get('/developers', (schema) => {
-    return schema.developers.all();
-  });
+  this.get('/developers');
 }

@@ -1,9 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300);
 
 body {
-	padding: 55px 20px 50px 20px;
-	font-family: 'Lato', 'Helvetica', 'Arial', sans-serif;
-	font-weight: normal;
+  padding: 55px 20px 50px 20px;
+  font-family: 'Lato', 'Helvetica', 'Arial', sans-serif;
+  font-weight: normal;
 }
 
 * {
@@ -12,13 +12,13 @@ body {
   box-sizing: border-box;
 }
 
-#snapchat_username {
-	text-decoration: underline;
-	cursor: pointer;
+.snapchat-username {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
-.padding_top {
-	padding-top: 20px;
+.padding-top {
+  padding-top: 20px;
 }
 
 .heading {
@@ -33,7 +33,7 @@ body {
 }
 
 .container {
-	width: 550px;
+  width: 550px;
 }
 
 .heading ul {
