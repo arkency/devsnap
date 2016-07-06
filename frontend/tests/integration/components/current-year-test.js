@@ -11,14 +11,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{current-year}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#current-year}}
-      template block text
-    {{/current-year}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), new Date().getFullYear());
 });
