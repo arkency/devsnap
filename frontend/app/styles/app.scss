@@ -1,0 +1,82 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300);
+
+body {
+	padding: 55px 20px 50px 20px;
+	font-family: 'Lato', 'Helvetica', 'Arial', sans-serif;
+	font-weight: normal;
+}
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#snapchat_username {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.padding_top {
+	padding-top: 20px;
+}
+
+.heading {
+  padding: 0.5rem 1rem;
+  background-color: #f7f7f9;
+  text-align: center;
+}
+
+.heading .navbar-brand {
+  display: block;
+  float: none;
+}
+
+.container {
+	width: 550px;
+}
+
+.heading ul {
+  display: none;
+}
+
+.image-box svg, .image-box img {
+  max-width: 95%;
+  max-width: calc(100% - 1px);
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.ghost-element {
+  margin-right: -4px;
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.image-box {
+  text-align: center;
+  height: calc(100vh - 100px);
+  min-height: 360px;
+}
+
+@media screen and (min-width: 545px) {
+  .image-box {
+    height: auto;
+  }
+
+  .heading .navbar-brand {
+    display: inline;
+    float: left;
+  }
+
+  .heading {
+    background-color: #ffffff;
+    text-align: left;
+    float: left;
+  }
+
+  .heading ul {
+    display: block;
+  }
+}

@@ -8,5 +8,7 @@ test('visiting /', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/');
+    assert.equal(find('nav a.navbar-brand').text().trim(), 'DevSnap');
+    assert.equal(find('.developer-full-name').length, 3 );
   });
 });
