@@ -26,4 +26,5 @@ export default function() {
   this.namespace = 'api/v1';
 
   this.get('/developers');
+  this.get('/developers/:id');
 }

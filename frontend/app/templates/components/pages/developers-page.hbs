@@ -9,43 +9,23 @@
   </thead>
 
   <tbody>
-  {{#each model as |developer|}}
+  {{#each model key="id" as |developer|}}
     <tr>
-      <td data-toggle="modal" data-target="#snapmodal<%= developer.id %>">
-          <span class="snapchat-username">
+      <td>
+        <span class="snapchat-username">
+          {{#link-to 'developers.show' developer.id}}
             {{developer.snapchatUsername}}
-          </span>
+          {{/link-to}}
+        </span>
       </td>
       <td>{{developer.fullName}}</td>
       <td>{{developer.about}}</td>
     </tr>
-
-    <div class="modal fade" id="snapmodal<%= developer.id %>">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <center><h1>{{developer.fullName}}</h1></center>
-            <center><h4 class="blockquote-footer">{{developer.about}}</h4></center>
-          </div>
-          <center>
-            <div class="modal-body">
-              {{#if developer.snapcodeImage }}
-                {{developer.snapcodeImage}}
-              {{else}}
-                <img src="https://feelinsonice-hrd.appspot.com/web/deeplink/snapcode?username=#{ developer.snapchatUsername }&type=PNG">
-              {{/if}}
-              <h2>{{developer.snapchatUsername}}</h2>
-            </div>
-          </center>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger-outline" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
   {{/each}}
   </tbody>
 </table>
 
 {{#link-to 'developers' class="btn btn-primary-outline"}}I want to be a part of this!{{/link-to}}
 {{#link-to 'developers' class="btn btn-primary-outline"}}Oh, just show me the codes!{{/link-to}}
+
+{{outlet}}
