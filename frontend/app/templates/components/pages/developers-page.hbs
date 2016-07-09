@@ -1,29 +1,13 @@
-<h5><span id="notice" class="label label-success">{{flash-message}}</span></h5>
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>Snapchat username</th>
-    <th>Full name</th>
-    <th>About</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  {{#each model key="id" as |developer|}}
-    <tr>
-      <td>
-        <span class="snapchat-username">
-          {{#link-to 'developers.show' developer.id}}
-            {{developer.snapchatUsername}}
-          {{/link-to}}
-        </span>
-      </td>
-      <td>{{developer.fullName}}</td>
-      <td>{{developer.about}}</td>
-    </tr>
-  {{/each}}
-  </tbody>
-</table>
+{{#if firstBatchOfDevelopersIsLoaded}}
+  {{developers-table developers=developers}}
+  {{#unless allDevelopersAreLoaded}}
+    {{#infinity-loader triggerOffset=300}}
+      {{loading-spinner}}
+    {{/infinity-loader}}
+  {{/unless}}
+{{else}}
+  {{loading-spinner}}
+{{/if}}
 
 {{#link-to 'developers' class="btn btn-primary-outline"}}I want to be a part of this!{{/link-to}}
 {{#link-to 'developers' class="btn btn-primary-outline"}}Oh, just show me the codes!{{/link-to}}

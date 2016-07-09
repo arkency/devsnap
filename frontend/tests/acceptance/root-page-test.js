@@ -31,10 +31,10 @@ test('displaying a table with developers', function(assert) {
   visit('/');
 
   andThen(function() {
-    assert.equal(find('table tbody .snapchat-username').length, 4 );
-    assert.equal(find('table tbody tr:first td:nth-child(1)').text().trim(), 'robocop' );
-    assert.equal(find('table tbody tr:first td:nth-child(2)').text().trim(), 'Robo Cop' );
-    assert.equal(find('table tbody tr:first td:nth-child(3)').text().trim(), 'Pif Paf' );
+    assert.equal(find('table tbody .snapchat-username').length, 4);
+    assert.equal(find('table tbody tr:first td:nth-child(1)').text().trim(), 'robocop');
+    assert.equal(find('table tbody tr:first td:nth-child(2)').text().trim(), 'Robo Cop');
+    assert.equal(find('table tbody tr:first td:nth-child(3)').text().trim(), 'Pif Paf');
   });
 });
 
