@@ -18,7 +18,6 @@ body {
 }
 
 .snapchat-username {
-  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -112,4 +111,11 @@ footer {
 
 .ember-modal-overlay {
   z-index: 10000;
+}
+.ember-modal-dialog {
+  background: none;
+  box-shadow: none;
+}
+.developer-details-modal {
+  text-align: center;
 }

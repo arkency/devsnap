@@ -1,7 +1,20 @@
-{{#modal-dialog close='goBackToDevelopers' translucentOverlay=true}}
-  <h1>{{model.fullName}}</h1>
-  <div class="snapchat-about">{{model.about}}</div>
-  <div class="snapchat-image">{{{model.snapcodeImage}}}</div>
-  <div class="snapchat-username">{{model.snapchatUsername}}</div>
-  <button {{action 'goBackToDevelopers'}} class="btn btn-danger">Close</button>
+{{#modal-dialog close='goBackToDevelopers' translucentOverlay=true container-class="developer-details-modal"}}
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" {{action 'goBackToDevelopers'}}>
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h1 class="modal-title" id="gridModalLabel">{{model.fullName}}</h1>
+        <div class="snapchat-about">{{model.about}}</div>
+      </div>
+      <div class="modal-body">
+        <div class="snapchat-image">{{{model.snapcodeImage}}}</div>
+        <div class="snapchat-username"><h2>{{model.snapchatUsername}}</h2></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary-outline" data-dismiss="modal" {{action 'goBackToDevelopers'}}>Close</button>
+      </div>
+    </div>
+  </div>
 {{/modal-dialog}}
