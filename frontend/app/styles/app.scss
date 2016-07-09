@@ -29,11 +29,15 @@ body {
   padding: 0.5rem 1rem;
   background-color: #f7f7f9;
   text-align: center;
-}
 
-.heading .navbar-brand {
-  display: block;
-  float: none;
+  .navbar-brand {
+    display: block;
+    float: none;
+  }
+
+  .developers-count {
+    display: inline-block;;
+  }
 }
 
 .container {
@@ -111,6 +115,9 @@ footer {
 
 .ember-modal-overlay {
   z-index: 10000;
+  &.translucent {
+    background: rgba(0, 0, 0, 0.5);
+  }
 }
 .ember-modal-dialog {
   background: none;

@@ -37,7 +37,10 @@ export default function() {
     const recordsCount = model.all().models.length;
     const ids = this._paginatedIdRange(page, perPage, recordsCount);
     const totalPages = Math.ceil(recordsCount / perPage);
-    request.mirageMeta = { total_pages: totalPages };
+    request.mirageMeta = {
+      total_pages: totalPages,
+      total_count: recordsCount
+    };
     return model.find(ids);
   };
 

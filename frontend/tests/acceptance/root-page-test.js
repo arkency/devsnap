@@ -85,3 +85,11 @@ test('if modal contains fullname, snapchat image, about and snapchat username', 
     assert.equal(find('.ember-modal-dialog .snapchat-about').text().trim(), robocop.about);
   });
 });
+
+test('developers counter in top navigation', function(assert) {
+  server.createList('developer', 4);
+  visit('/');
+  andThen(function() {
+    assert.equal(find('.developers-count').text().trim(), '4');
+  });
+});
