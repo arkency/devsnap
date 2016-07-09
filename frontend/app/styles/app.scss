@@ -1,9 +1,12 @@
+@import "ember-cli-bootstrap-4/bootstrap";
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300);
 @import "ember-modal-dialog/ember-modal-structure";
 @import "ember-modal-dialog/ember-modal-appearance";
+@import "./loading-spinner";
+@import "./responsive-developers-table";
 
 body {
-  padding: 55px 20px 50px 20px;
+  padding: 55px 20px 80px 20px;
   font-family: 'Lato', 'Helvetica', 'Arial', sans-serif;
   font-weight: normal;
 }
@@ -62,6 +65,30 @@ body {
   min-height: 360px;
 }
 
+footer {
+  .copyright {
+    padding-top: 6px;
+    div {
+      display: inline-block;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  footer {
+    .btn {
+      width: 100%;
+      margin-bottom: 1%;
+    }
+    .btn:first-child {
+      margin-right: 10px;
+    }
+    .pull-xs-left {
+      width: 100%;
+    }
+  }
+}
+
 @media screen and (min-width: 545px) {
   .image-box {
     height: auto;
@@ -81,4 +108,8 @@ body {
   .heading ul {
     display: block;
   }
+}
+
+.ember-modal-overlay {
+  z-index: 10000;
 }

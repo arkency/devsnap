@@ -1,7 +1,9 @@
-<nav class="navbar navbar-light bg-faded navbar-fixed-bottom">
-  <ul class="nav navbar-nav pull-xs-right">
-    <li class="nav-item nav-link">
-      Copyright © {{current-year}} · All Rights Reserved
-    </li>
-  </ul>
-</nav>
+<footer class="footer navbar navbar-default bg-faded navbar-fixed-bottom">
+  <div class="pull-xs-left">
+    {{#link-to 'developers.new' class="btn btn-primary-outline"}}I want to be a part of this!{{/link-to}}
+    {{#link-to 'codes' class="btn btn-primary-outline"}}Oh, just show me the codes!{{/link-to}}
+  </div>
+  <div class="pull-xs-right copyright">
+    Copyright © {{current-year}} · All Rights Reserved
+  </div>
+</footer>
