@@ -1,4 +1,7 @@
 {{#modal-dialog close='goBackToDevelopers' translucentOverlay=true}}
   <h1>{{model.fullName}}</h1>
+  <div class="snapchat-about">{{model.about}}</div>
+  <div class="snapchat-image">{{{model.snapcodeImage}}}</div>
+  <div class="snapchat-username">{{model.snapchatUsername}}</div>
   <button {{action 'goBackToDevelopers'}} class="btn btn-danger-outline">Close</button>
 {{/modal-dialog}}

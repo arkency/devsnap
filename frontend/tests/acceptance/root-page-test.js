@@ -45,7 +45,6 @@ test('opening a modal after clicking on snapchat username', function(assert) {
   helpers.clickOnFirstSnapchatUsername();
   andThen(function() {
     assert.equal(find('.ember-modal-dialog').length, 1);
-    assert.equal(find('h1').text().trim(), robocop.fullName);
     assert.equal(currentURL(), '/developers/' + robocop.id);
   });
 });
@@ -71,5 +70,18 @@ test('closing a modal after clicking on overlay shadow', function(assert) {
   andThen(function() {
     assert.equal(find('.ember-modal-dialog').length, 0);
     assert.equal(currentURL(), '/');
+  });
+});
+
+test('if modal contains fullname, snapchat image, about and snapchat username', function(assert) {
+  const robocop = helpers.createRobocop();
+  visit('/');
+
+  helpers.clickOnFirstSnapchatUsername();
+  andThen(function() {
+    assert.equal(find('h1').text().trim(), robocop.fullName);
+    assert.equal(find('.ember-modal-dialog .snapchat-image svg').length, 1);
+    assert.equal(find('.ember-modal-dialog .snapchat-username').text().trim(), robocop.snapchatUsername);
+    assert.equal(find('.ember-modal-dialog .snapchat-about').text().trim(), robocop.about);
   });
 });
