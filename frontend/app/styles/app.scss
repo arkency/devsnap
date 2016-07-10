@@ -126,6 +126,17 @@ footer {
 .developer-details-modal {
   text-align: center;
 }
+.new-developer-modal {
+  text-align: center;
+}
 .display-codes-switcher {
   display: inline-block;
+}
+.new-developer-form {
+  .form-group {
+    text-align: left;
+    .help-block {
+      color: #d9534f;
+    }
+  }
 }

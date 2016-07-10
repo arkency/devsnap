@@ -8,6 +8,9 @@ export default Ember.Component.extend(InfinityRoute, {
   didReceiveAttrs() {
     this._loadDevelopers();
   },
+  infinityModelLoaded() {
+    this.set('allDevelopersAreLoaded', true);
+  },
   _loadDevelopers() {
     this.set('firstBatchOfDevelopersIsLoaded', false);
     this.infinityModel('developer', { perPage: 20, modelPath: 'developers' }).then((result) => {
@@ -15,8 +18,5 @@ export default Ember.Component.extend(InfinityRoute, {
       this.set('firstBatchOfDevelopersIsLoaded', true);
       this.get('developersCount').setCount(result.get('meta').total_count);
     });
-  },
-  infinityModelLoaded() {
-    this.set('allDevelopersAreLoaded', true);
   }
 });

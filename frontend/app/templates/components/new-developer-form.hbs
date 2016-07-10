@@ -1,0 +1,53 @@
+<form {{action 'submit' on="submit"}}>
+  <div class="container card card-block">
+    <div class="field snapchat-username-field">
+      <div class="form-group {{if errors.snapchatUsername 'has-danger'}}">
+        <label class="control-label required" for="developer-snapchat-username">Snapchat username</label>
+        {{#auto-focus}}
+          {{input placeholder="anakin_skywalker"
+                  class="form-control form-control-danger"
+                  type="text"
+                  value=form.snapchatUsername
+                  id="developer-snapchat-username"
+          }}
+        {{/auto-focus}}
+        {{display-error error=errors.snapchatUsername}}
+      </div>
+    </div>
+
+    <div class="field fullname-field">
+      <div class="form-group {{if errors.fullname 'has-danger'}}">
+        <label class="control-label required" for="developer-full-name">Full name</label>
+        {{input placeholder="Han Solo"
+                class="form-control form-control-danger"
+                type="text"
+                value=form.fullname
+                id="developer-full-name"}}
+        {{display-error error=errors.fullname}}
+      </div>
+    </div>
+
+    <div class="field about-field">
+      <div class="form-group {{if errors.about 'has-danger'}}">
+        <label class="control-label required" for="developer-about">About</label>
+        {{#textarea rows="5"
+                  placeholder="Anything that best describes you as a developer. Give your best shot."
+                  class="form-control form-control-danger"
+                  id="developer-about"
+                  value=form.about
+        }}{{/textarea}}
+        {{display-error error=errors.about}}
+      </div>
+    </div>
+
+    <div class="actions">
+      <span style="padding-right: 20px;">
+        <input type="submit" name="commit" value="OK. Add me!" class="btn btn-primary-outline"
+               data-disable-with="OK. Add me!" disabled={{formInvalid}}>
+      </span>
+      <button type="button" class="btn btn-danger-outline" data-dismiss="modal" {{action 'goBackToDevelopers'}}>
+        No, take me back.
+      </button>
+    </div>
+  </div>
+</form>
