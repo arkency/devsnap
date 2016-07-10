@@ -19,6 +19,19 @@ test('the submit button should be disabled when form is not touched', function(a
   });
 });
 
+test('should close modal after clicking on cancel button', function(assert) {
+  visit('/developers/new');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/developers/new');
+  });
+  click('form .cancel-button');
+  andThen(function() {
+    assert.equal(currentURL(), '/');
+    assert.equal(find('.ember-modal-dialog form').length, 0);
+  });
+});
+
 test('the submit button should be enabled when all fields are filled', function(assert) {
   visit('/developers/new');
   fillIn('input#developer-snapchat-username', 'Test');
@@ -66,3 +79,4 @@ test('an error should be displayed when any field is blank', function(assert) {
     assert.equal(find('.ember-modal-dialog .help-block').length, 0);
   });
 });
+

@@ -18,6 +18,11 @@ export default Ember.Component.extend({
       return this._noErrors();
   }),
   formInvalid: Ember.computed.not('formValid'),
+  actions: {
+    clickedCancelButton() {
+      this.attrs.onClickCancelButton();
+    }
+  },
   _setInitialState() {
     this._resetErrors();
     this._resetForm();
