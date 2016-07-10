@@ -1,5 +1,5 @@
 {{#if firstBatchOfDevelopersIsLoaded}}
-  {{developers-table developers=developers}}
+  {{developers-list developers=developers}}
   {{#unless allDevelopersAreLoaded}}
     {{#infinity-loader triggerOffset=300}}
       {{loading-spinner}}
