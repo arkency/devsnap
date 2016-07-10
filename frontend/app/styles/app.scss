@@ -64,7 +64,6 @@ body {
 
 .image-box {
   text-align: center;
-  height: calc(100vh - 100px);
   min-height: 360px;
 }
 
@@ -138,5 +137,18 @@ footer {
     .help-block {
       color: #d9534f;
     }
+  }
+}
+.developers-page {
+  .sk-circle {
+    margin: 100px auto;
+  }
+}
+.snapchat-codes-list {
+  .description {
+    visibility: hidden;
+  }
+  .image-box:hover .description {
+    visibility: visible;
   }
 }

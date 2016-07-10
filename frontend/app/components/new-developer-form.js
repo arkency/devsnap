@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  store: Ember.inject.service(),
   classNames: ['new-developer-form'],
   form: {},
   errors: {},
@@ -21,11 +22,20 @@ export default Ember.Component.extend({
   actions: {
     clickedCancelButton() {
       this.attrs.onClickCancelButton();
+    },
+    submitForm() {
+      this.set('submitting', true);
+      this.attrs.onSubmit();
+      this.get('store').createRecord('developer', this.get('form')).save().then((developer) => {
+        this.set('submitting', false);
+        this.attrs.onSave(developer);
+      });
     }
   },
   _setInitialState() {
     this._resetErrors();
     this._resetForm();
+    this.set('submitting', false);
   },
   _resetErrors() {
     this._fieldNames().forEach((fieldName) => {

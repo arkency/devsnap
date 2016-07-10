@@ -4,6 +4,9 @@
       <div class="image-box col-lg-3 col-md-4 col-sm-6 col-xs-12" style="<%= style %>">
         <div class="ghost-element"></div>
           {{snapcode-image-of-developer developer=developer}}
+          <div class="description">
+            {{developer.snapchatUsername}}
+          </div>
       </div>
     {{/each}}
   </div>

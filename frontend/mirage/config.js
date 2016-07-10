@@ -30,6 +30,7 @@ export default function() {
   });
 
   this.get('/developers/:id');
+  this.post('/developers');
 
   this._paginate = function(model, request) {
     const page = Number(request.queryParams.page);

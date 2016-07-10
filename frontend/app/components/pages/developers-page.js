@@ -3,6 +3,7 @@ import InfinityRoute from "ember-infinity/mixins/route";
 
 export default Ember.Component.extend(InfinityRoute, {
   store: Ember.inject.service(),
+  classNames: ['developers-page'],
   developersCount: Ember.inject.service(),
   developers: [],
   didReceiveAttrs() {
