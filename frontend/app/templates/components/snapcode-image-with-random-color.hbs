@@ -1,0 +1,9 @@
+<div class="image-box col-lg-3 col-md-4 col-sm-6 col-xs-12" style={{style}}>
+  <div class="ghost-element"></div>
+    {{#link-to 'developers.show' developer.id}}
+      {{snapcode-image-of-developer developer=developer}}
+    {{/link-to}}
+    <div class="description">
+      {{developer.snapchatUsername}}
+    </div>
+</div>
