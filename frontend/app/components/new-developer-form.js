@@ -18,13 +18,6 @@ export default Ember.Component.extend({
       return this._noErrors();
   }),
   formInvalid: Ember.computed.not('formValid'),
-  _formValidator: Ember.observer('form.{snapchatUsername,fullname,about}', function() {
-    this._resetErrors();
-    this._validatePresenceOfEachField();
-  }),
-  _eachFieldIsTouched: Ember.computed('form.{snapchatUsername,fullname,about}', function() {
-    return this._fieldValuesArray().find((v) => { return v === null; }) === undefined;
-  }),
   _setInitialState() {
     this._resetErrors();
     this._resetForm();
@@ -34,15 +27,8 @@ export default Ember.Component.extend({
       this.set(`errors.${fieldName}`, null);
     });
   },
-  _resetForm() {
-    this._fieldNames().forEach((fieldName) => {
-      this.set(`form.${fieldName}`, null);
-    });
-  },
-  _validatePresenceOf(fieldName) {
-    if(this.get(`form.${fieldName}.length`) === 0) {
-      this.set(`errors.${fieldName}`, "can't be blank!");
-    }
+  _noErrors() {
+    return this._errorValuesArray().compact().length === 0;
   },
   _fieldNames() {
     return [
@@ -50,6 +36,28 @@ export default Ember.Component.extend({
       'fullname',
       'about'
     ];
+  },
+  _formValidator: Ember.observer('form.{snapchatUsername,fullname,about}', function() {
+    this._resetErrors();
+    this._validatePresenceOfEachField();
+  }),
+  _validatePresenceOfEachField() {
+    this._fieldNames().forEach((fieldName) => {
+      this._validatePresenceOf(fieldName);
+    });
+  },
+  _validatePresenceOf(fieldName) {
+    if(this.get(`form.${fieldName}.length`) === 0) {
+      this.set(`errors.${fieldName}`, "can't be blank!");
+    }
+  },
+  _eachFieldIsTouched: Ember.computed('form.{snapchatUsername,fullname,about}', function() {
+    return this._fieldValuesArray().find((v) => { return v === null; }) === undefined;
+  }),
+  _resetForm() {
+    this._fieldNames().forEach((fieldName) => {
+      this.set(`form.${fieldName}`, null);
+    });
   },
   _fieldValuesArray() {
     return this._fieldNames().map((fieldName) => {
@@ -60,13 +68,5 @@ export default Ember.Component.extend({
     return this._fieldNames().map((fieldName) => {
       return this.get(`errors.${fieldName}`);
     });
-  },
-  _validatePresenceOfEachField() {
-    this._fieldNames().forEach((fieldName) => {
-      this._validatePresenceOf(fieldName);
-    });
-  },
-  _noErrors() {
-    return this._errorValuesArray().compact().length === 0;
   }
 });
