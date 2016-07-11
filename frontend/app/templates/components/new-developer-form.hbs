@@ -16,14 +16,14 @@
     </div>
 
     <div class="field fullname-field">
-      <div class="form-group {{if errors.fullname 'has-danger'}}">
+      <div class="form-group {{if errors.fullName 'has-danger'}}">
         <label class="control-label required" for="developer-full-name">Full name</label>
         {{input placeholder="Han Solo"
                 class="form-control form-control-danger"
                 type="text"
-                value=form.fullname
+                value=form.fullName
                 id="developer-full-name"}}
-        {{display-error error=errors.fullname}}
+        {{display-error error=errors.fullName}}
       </div>
     </div>
 

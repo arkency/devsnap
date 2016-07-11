@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   store: Ember.inject.service(),
+  developersCount: Ember.inject.service(),
+  newlyCreatedDeveloper: Ember.inject.service(),
   classNames: ['new-developer-form'],
   form: {},
   errors: {},
@@ -9,8 +11,8 @@ export default Ember.Component.extend({
     this._setInitialState();
   },
   formValid: Ember.computed(
-    'form.{snapchatUsername,fullname,about}',
-    'errors.{snapchatUsername,fullname,about}',
+    'form.{snapchatUsername,fullName,about}',
+    'errors.{snapchatUsername,fullName,about}',
     '_eachFieldIsTouched',
     function() {
       if(!this.get('_eachFieldIsTouched')) {
@@ -28,6 +30,8 @@ export default Ember.Component.extend({
       this.attrs.onSubmit();
       this.get('store').createRecord('developer', this.get('form')).save().then((developer) => {
         this.set('submitting', false);
+        this.get('developersCount').increment();
+        this.get('newlyCreatedDeveloper').setDeveloper(developer);
         this.attrs.onSave(developer);
       });
     }
@@ -48,11 +52,11 @@ export default Ember.Component.extend({
   _fieldNames() {
     return [
       'snapchatUsername',
-      'fullname',
+      'fullName',
       'about'
     ];
   },
-  _formValidator: Ember.observer('form.{snapchatUsername,fullname,about}', function() {
+  _formValidator: Ember.observer('form.{snapchatUsername,fullName,about}', function() {
     this._resetErrors();
     this._validatePresenceOfEachField();
   }),
@@ -66,7 +70,7 @@ export default Ember.Component.extend({
       this.set(`errors.${fieldName}`, "can't be blank!");
     }
   },
-  _eachFieldIsTouched: Ember.computed('form.{snapchatUsername,fullname,about}', function() {
+  _eachFieldIsTouched: Ember.computed('form.{snapchatUsername,fullName,about}', function() {
     return this._fieldValuesArray().find((v) => { return v === null; }) === undefined;
   }),
   _resetForm() {
