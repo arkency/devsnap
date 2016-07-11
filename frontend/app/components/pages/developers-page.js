@@ -33,10 +33,10 @@ export default Ember.Component.extend(InfinityRoute, {
     if(!this.get('allDevelopersAreLoaded')) {
       this._showMessage('Scroll down the page to see yourself on the list!');
       this._scrollToTheTopOfPage();
-      return;
+    } else {
+      this.get('developers').pushObject(this.get('newlyCreatedDeveloper._internalModel'));
+      this._scrollToTheBottomOfPage();
     }
-    this.get('developers').pushObject(this.get('newlyCreatedDeveloper._internalModel'));
-    this._scrollToTheBottomOfPage();
   }),
   _showMessage(message) {
     this.set('notification', message);
