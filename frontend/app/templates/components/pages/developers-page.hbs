@@ -1,4 +1,4 @@
-{{flash-message message=notification}}
+{{flash-message message=notification onClose=(action 'onCloseNotificationHandler')}}
 {{#if firstBatchOfDevelopersIsLoaded}}
   {{developers-list developers=developers}}
   {{#unless allDevelopersAreLoaded}}

@@ -15,6 +15,11 @@ export default Ember.Component.extend(InfinityRoute, {
   infinityModelLoaded() {
     this.set('allDevelopersAreLoaded', true);
   },
+  actions: {
+    onCloseNotificationHandler() {
+      this.set('notification', null);
+    }
+  },
   _loadDevelopers() {
     this.set('firstBatchOfDevelopersIsLoaded', false);
     this.infinityModel('developer', { perPage: 20, modelPath: 'developers' }).then((result) => {
