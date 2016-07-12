@@ -23,7 +23,7 @@ test('visiting /developers/new', function(assert) {
 test('the submit button should be disabled when form is not touched', function(assert) {
   visit('/developers/new');
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog form input[type="submit"]:disabled').length, 1);
+    assert.equal(find('.ember-modal-dialog form button[type="submit"]:disabled').length, 1);
   });
 });
 
@@ -44,7 +44,7 @@ test('the submit button should be enabled when all fields are filled', function(
   visit('/developers/new');
   helpers.fillAllFields();
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog form input[type="submit"]:disabled').length, 0);
+    assert.equal(find('.ember-modal-dialog form button[type="submit"]:disabled').length, 0);
   });
 });
 
@@ -54,7 +54,7 @@ test('an error should be displayed when any field is blank', function(assert) {
   fillIn('input#developer-full-name', 'Test');
   fillIn('textarea#developer-about', 'Test');
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog form input[type="submit"]:disabled').length, 1);
+    assert.equal(find('.ember-modal-dialog form button[type="submit"]:disabled').length, 1);
     assert.equal(find('.ember-modal-dialog .help-block').length, 1);
     assert.equal(find('.ember-modal-dialog .snapchat-username-field .help-block').text().trim(), "can't be blank!");
   });
@@ -63,7 +63,7 @@ test('an error should be displayed when any field is blank', function(assert) {
   fillIn('input#developer-full-name', '');
   fillIn('textarea#developer-about', 'Test');
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog form input[type="submit"]:disabled').length, 1);
+    assert.equal(find('.ember-modal-dialog form button[type="submit"]:disabled').length, 1);
     assert.equal(find('.ember-modal-dialog .help-block').length, 1);
     assert.equal(find('.ember-modal-dialog .fullname-field .help-block').text().trim(), "can't be blank!");
   });
@@ -72,13 +72,13 @@ test('an error should be displayed when any field is blank', function(assert) {
   fillIn('input#developer-full-name', 'Test');
   fillIn('textarea#developer-about', '');
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog form input[type="submit"]:disabled').length, 1);
+    assert.equal(find('.ember-modal-dialog form button[type="submit"]:disabled').length, 1);
     assert.equal(find('.ember-modal-dialog .help-block').length, 1);
     assert.equal(find('.ember-modal-dialog .about-field .help-block').text().trim(), "can't be blank!");
   });
   helpers.fillAllFields();
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog form input[type="submit"]:disabled').length, 0);
+    assert.equal(find('.ember-modal-dialog form button[type="submit"]:disabled').length, 0);
     assert.equal(find('.ember-modal-dialog .help-block').length, 0);
   });
 });
@@ -90,7 +90,7 @@ test('after saving the form the counter should be increased', function(assert) {
     assert.equal(find('.developers-count').text().trim(), 5);
   });
   helpers.fillAllFields();
-  click('.new-developer-form input[type="submit"]');
+  click('.new-developer-form button[type="submit"]');
   andThen(function() {
     assert.equal(find('.developers-count').text().trim(), 6);
   });
@@ -103,7 +103,7 @@ test('after saving the form the developer should be appended to the list', funct
     assert.equal(find('table tbody tr').length, 5);
   });
   helpers.fillAllFields();
-  click('.new-developer-form input[type="submit"]');
+  click('.new-developer-form button[type="submit"]');
   andThen(function() {
     assert.equal(find('table tbody tr').length, 6);
     assert.equal(find('table tbody tr:last td:first').text().trim(), 'Test');

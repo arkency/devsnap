@@ -1,5 +1,5 @@
 <form {{action 'submitForm' on="submit"}}>
-  <div class="container card card-block">
+  <div class="card card-block">
     <div class="field snapchat-username-field">
       <div class="form-group {{if errors.snapchatUsername 'has-danger'}}">
         <label class="control-label required" for="developer-snapchat-username">Snapchat username</label>
@@ -44,10 +44,7 @@
       {{#if submitting}}
         {{loading-spinner}}
       {{else}}
-        <span style="padding-right: 20px;">
-          <input type="submit" name="commit" value="OK. Add me!" class="btn btn-primary-outline"
-                 data-disable-with="OK. Add me!" disabled={{formInvalid}}>
-        </span>
+        <button type="submit" name="commit" class="btn btn-primary-outline" disabled={{formInvalid}}>OK. Add me!</button>
         <button type="button" class="btn btn-danger-outline cancel-button" data-dismiss="modal" {{action 'clickedCancelButton'}}>
           No, take me back.
         </button>
