@@ -1,8 +1,17 @@
 <nav class="navbar-fixed-top heading">
-  <%= link_to "DevSnap", root_path, class: "navbar-brand" %>
+  <div class="form-inline col-sm-6">
+    <%= link_to "DevSnap", root_path, class: "navbar-brand" %>
+    <%= form_tag(developers_path, method: "get", class: "navbar-form navbar-left") do %>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: "Look a dev up..." %>
+      <%= submit_tag "Find", class: 'btn btn-primary-outline' %>
+    </div>
+    <% end %>
+  </div>
+
   <ul class="nav navbar-nav pull-xs-right">
     <li class="nav-item nav-link">
-    <%= Developer.count %> <span style="padding-right: 20px">Awesome devs and counting...</span>
+      <%= Developer.count %> <span style="padding-right: 20px">Awesome devs and counting...</span>
     </li>
   </ul>
 </nav>
