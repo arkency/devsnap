@@ -1,3 +1,14 @@
+GIT
+  remote: git://github.com/thoughtbot/ember-cli-rails.git
+  revision: 8746bf3e67ee99cc80077700bcb01506fb340db6
+  ref: 8746bf3e67ee99cc80077700bcb01506fb340db6
+  specs:
+    ember-cli-rails (0.7.4)
+      cocaine (~> 0.5.8)
+      ember-cli-rails-assets (~> 0.6.2)
+      html_page (~> 0.1.0)
+      railties (>= 3.2, < 5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -24,6 +35,11 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_model_serializers (0.10.2)
+      actionpack (>= 4.1, < 6)
+      activemodel (>= 4.1, < 6)
+      jsonapi (~> 0.1.1.beta2)
+      railties (>= 4.1, < 6)
     activejob (5.0.0.beta3)
       activesupport (= 5.0.0.beta3)
       globalid (>= 0.3.6)
@@ -47,6 +63,10 @@ GEM
     bootstrap_form (2.3.0)
     builder (3.2.2)
     byebug (8.2.4)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.8)
+      climate_control (>= 0.0.3, < 1.0)
     codeclimate-test-reporter (0.5.0)
       simplecov (>= 0.7.1, < 1.0.0)
     coffee-rails (4.1.1)
@@ -61,12 +81,14 @@ GEM
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    ember-cli-rails-assets (0.6.2)
     erubis (2.7.0)
     execjs (2.6.0)
     ffi (1.9.10)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     honeybadger (2.6.0)
+    html_page (0.1.0)
     i18n (0.7.0)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -76,6 +98,8 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
+    jsonapi (0.1.1.beta2)
+      json (~> 1.8)
     listen (3.0.6)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9.7)
@@ -193,18 +217,19 @@ GEM
     websocket-driver (0.6.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    will_paginate (3.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers (~> 0.10.0)
   bootstrap (~> 4.0.0.alpha3)
   bootstrap_form (~> 2.3)
   byebug
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
   database_cleaner (~> 1.5, >= 1.5.1)
+  ember-cli-rails!
   honeybadger (~> 2.0)
   jbuilder (~> 2.0)
   jquery-rails
@@ -222,7 +247,9 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (~> 3.0)
-  will_paginate (~> 3.1)
+
+RUBY VERSION
+   ruby 2.3.0p0
 
 BUNDLED WITH
-   1.11.2
+   1.12.5

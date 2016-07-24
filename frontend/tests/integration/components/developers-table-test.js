@@ -11,15 +11,13 @@ test('it renders', function(assert) {
 
   const developers = [
     {
-      id: 1,
-      snapchatUsername: 'jacksparrow',
+      id: 'jacksparrow',
       fullName: 'Jack Sparrow',
       about: 'Sailing and drinking',
       snapcodeImage: '<some-code>'
     },
     {
-      id: 2,
-      snapchatUsername: 'spiderman',
+      id: 'spiderman',
       fullName: 'Spider Man',
       about: 'Spiderwebs',
       snapcodeImage: '<different-code>'

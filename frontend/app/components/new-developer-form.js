@@ -26,13 +26,21 @@ export default Ember.Component.extend({
       this.attrs.onClickCancelButton();
     },
     submitForm() {
+      this._validateForm();
+      if(this.get('formInvalid')) {
+        return;
+      }
       this.set('submitting', true);
       this.attrs.onSubmit();
-      this.get('store').createRecord('developer', this.get('form')).save().then((developer) => {
+      const params = Ember.merge(this.get('form'), { id: this.get('form.snapchatUsername') });
+      this.get('store').createRecord('developer', params).save().then((developer) => {
         this.set('submitting', false);
         this.get('developersCount').increment();
         this.get('newlyCreatedDeveloper').setDeveloper(developer);
         this.attrs.onSave(developer);
+      }, (response) => {
+        this._handleErrorsFromApi(response.errors);
+        this.set('submitting', false);
       });
     }
   },
@@ -45,6 +53,7 @@ export default Ember.Component.extend({
     this._fieldNames().forEach((fieldName) => {
       this.set(`errors.${fieldName}`, null);
     });
+    this.set('apiErrors', []);
   },
   _noErrors() {
     return this._errorValuesArray().compact().length === 0;
@@ -57,13 +66,27 @@ export default Ember.Component.extend({
     ];
   },
   _formValidator: Ember.observer('form.{snapchatUsername,fullName,about}', function() {
+    this._validateForm();
+  }),
+  _validateForm() {
     this._resetErrors();
     this._validatePresenceOfEachField();
-  }),
+    this._validateUniquenessOfSnapchatUsername();
+  },
   _validatePresenceOfEachField() {
     this._fieldNames().forEach((fieldName) => {
       this._validatePresenceOf(fieldName);
     });
+  },
+  _validateUniquenessOfSnapchatUsername() {
+    if(!this.get('form.snapchatUsername.length')) {
+      return;
+    }
+    if(this.get('store').peekRecord('developer', this.get('form.snapchatUsername'))) {
+      this.set('errors.snapchatUsername', 'This snapchat username is already on the list.');
+    } else {
+      this.set('errors.snapchatUsername', null);
+    }
   },
   _validatePresenceOf(fieldName) {
     if(this.get(`form.${fieldName}.length`) === 0) {
@@ -87,5 +110,21 @@ export default Ember.Component.extend({
     return this._fieldNames().map((fieldName) => {
       return this.get(`errors.${fieldName}`);
     });
+  },
+  _fieldExists(name) {
+    return this._fieldNames().find(function(fieldName) {
+      return fieldName === name;
+    });
+  },
+  _handleErrorsFromApi(errors) {
+    let other_errors = [];
+    errors.forEach((error) => {
+      if(this._fieldExists(error.id.camelize())) {
+        this.set(`errors.${error.id.camelize()}`, error.title);
+      } else {
+        other_errors.pushObject(error);
+      }
+    });
+    this.set('apiErrors', other_errors);
   }
 });

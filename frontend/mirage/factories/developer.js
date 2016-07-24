@@ -1,9 +1,6 @@
 import { Factory } from 'ember-cli-mirage';
 
 export default Factory.extend({
-  snapchatUsername(i) {
-    return 'jacksparrow' + i;
-  },
   fullName(i) {
     return 'Jack Sparrow' + i;
   },

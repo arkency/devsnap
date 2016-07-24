@@ -8,6 +8,7 @@ export default Ember.Component.extend(InfinityRoute, {
   classNames: ['developers-page'],
   developersCount: Ember.inject.service(),
   developers: [],
+  totalPagesParam: "meta.total-pages",
   didReceiveAttrs() {
     this._loadDevelopers();
     this._activateObservers();
@@ -25,7 +26,7 @@ export default Ember.Component.extend(InfinityRoute, {
     this.infinityModel('developer', { perPage: 20, modelPath: 'developers' }).then((result) => {
       this.set('developers', result);
       this.set('firstBatchOfDevelopersIsLoaded', true);
-      this.get('developersCount').setCount(result.get('meta').total_count);
+      this.get('developersCount').setCount(result.get('meta')['total-count']);
     });
   },
   _activateObservers() {

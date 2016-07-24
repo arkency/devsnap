@@ -6,7 +6,6 @@ moduleForAcceptance('Acceptance | root page');
 const helpers = {
   createRobocop() {
     return server.create('developer', {
-      snapchatUsername: 'robocop',
       fullName: 'Robo Cop',
       about: 'Pif Paf'
     });
@@ -26,13 +25,13 @@ test('visiting /', function(assert) {
 });
 
 test('displaying a table with developers', function(assert) {
-  helpers.createRobocop();
+  const robocop = helpers.createRobocop();
   server.createList('developer', 3);
   visit('/');
 
   andThen(function() {
     assert.equal(find('table tbody .snapchat-username').length, 4);
-    assert.equal(find('table tbody tr:first td:nth-child(1)').text().trim(), 'robocop');
+    assert.equal(find('table tbody tr:first td:nth-child(1)').text().trim(), robocop.id);
     assert.equal(find('table tbody tr:first td:nth-child(2)').text().trim(), 'Robo Cop');
     assert.equal(find('table tbody tr:first td:nth-child(3)').text().trim(), 'Pif Paf');
   });
@@ -81,7 +80,7 @@ test('if modal contains fullname, snapchat image, about and snapchat username', 
   andThen(function() {
     assert.equal(find('h1').text().trim(), robocop.fullName);
     assert.equal(find('.ember-modal-dialog .snapchat-image svg').length, 1);
-    assert.equal(find('.ember-modal-dialog .snapchat-username').text().trim(), robocop.snapchatUsername);
+    assert.equal(find('.ember-modal-dialog .snapchat-username').text().trim(), robocop.id);
     assert.equal(find('.ember-modal-dialog .snapchat-about').text().trim(), robocop.about);
   });
 });

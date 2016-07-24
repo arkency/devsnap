@@ -1,4 +1,11 @@
 <form {{action 'submitForm' on="submit"}}>
+  {{#if apiErrors}}
+    <div class="api-errors">
+      {{#each apiErrors as |error|}}
+        {{display-error error=error.title}}
+      {{/each}}
+    </div>
+  {{/if}}
   <div class="card card-block">
     <div class="field snapchat-username-field">
       <div class="form-group {{if errors.snapchatUsername 'has-danger'}}">
