@@ -18,6 +18,7 @@ gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
 gem 'honeybadger', '~> 2.0'
 gem 'ember-cli-rails', github: 'thoughtbot/ember-cli-rails', :ref => '8746bf3e67ee99cc80077700bcb01506fb340db6'
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'nokogiri', require: false
 
 group :development, :test do
   gem 'byebug'
