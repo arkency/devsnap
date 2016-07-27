@@ -97,7 +97,7 @@ shared_examples :developers_repository do
   end
 
   describe '#count' do
-    it 'returns paginated records' do
+    it 'returns records count' do
       create_developers(3)
       result = repo.count
       expect(result).to eq 3
