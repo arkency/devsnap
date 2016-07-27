@@ -6,7 +6,7 @@ class AddDeveloperToListForm
   validates :snapchat_username, :full_name, :about, presence: true
 
   def initialize(params = {})
-    @snapchat_username = params[:snapchat_username]
+    @snapchat_username = params[:snapchat_username] || params[:id]
     @full_name         = params[:full_name]
     @about             = params[:about]
   end

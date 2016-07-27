@@ -11,7 +11,7 @@ module Api
       end
 
       def create
-        form = AddDeveloperToListForm.new(developer_params)
+        form = JsonApiFormFactory.build(AddDeveloperToListForm, params)
         AddDeveloperToList.new(repo).call(form)
         head :no_content
       rescue AddDeveloperToList::InvalidParams => exc
@@ -24,7 +24,7 @@ module Api
           :unprocessable_entity,
           { id: 'snapchat-username' }
         )
-      rescue ActionController::ParameterMissing => e
+      rescue JsonApiFormFactory::InvalidDataStructure => e
         render_error(e.message, :unprocessable_entity)
       end
 
@@ -36,10 +36,6 @@ module Api
       end
 
       private
-
-      def developer_params
-        data_attributes.merge(snapchat_username: params_id)
-      end
 
       def repo
         @developers_repo ||= DevelopersRepo.new
