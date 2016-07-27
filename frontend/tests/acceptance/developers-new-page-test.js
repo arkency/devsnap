@@ -1,124 +1,174 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'devsnap/tests/helpers/module-for-acceptance';
+import PageObject from 'devsnap/tests/page-object';
+
+const {
+  visitable,
+  fillable,
+  clickable,
+  text
+} = PageObject;
+
+const page = PageObject.create({
+  visit: visitable('/developers/new'),
+
+  fillInSnapchatUsername:      fillable('#developer-snapchat-username'),
+  fillInFullName:              fillable('#developer-full-name'),
+  fillInAbout:                 fillable('#developer-about'),
+
+  snapchatUsername:            text('#developer-snapchat-username'),
+  fullName:                    text('#developer-full-name'),
+  about:                       text('#developer-about'),
+  lastSnapchatUsernameInTable: text('table tbody tr:last td:first'),
+  developersCounter:           text('.developers-count'),
+
+  clickCancelButton:           clickable('.cancel-button'),
+  clickSubmitButton:           clickable('.new-developer-form button[type="submit"]'),
+
+  fillInAllFields() {
+    return this.fillInSnapchatUsername('Test')
+      .fillInFullName('Test')
+      .fillInAbout('Test');
+  },
+  disabledSubmitButton() {
+    return find('.ember-modal-dialog form button[type="submit"]:disabled');
+  },
+  tableRows() {
+    return find('table tbody tr');
+  },
+  formTag() {
+    return find('.ember-modal-dialog form');
+  }
+});
 
 moduleForAcceptance('Acceptance | developers/new page');
 
-const helpers = {
-  fillAllFields() {
-    fillIn('input#developer-snapchat-username', 'Test');
-    fillIn('input#developer-full-name', 'Test');
-    fillIn('textarea#developer-about', 'Test');
+const assertions = {
+  submitButtonShouldBeDisabled(assert) {
+    assert.equal(page.disabledSubmitButton().length, 1);
+  },
+  submitButtonShouldNotBeDisabled(assert) {
+    assert.equal(page.disabledSubmitButton().length, 0);
+  },
+  thereShouldBeOnlyOneError(assert) {
+    assert.equal(find('.ember-modal-dialog .help-block').length, 1);
+  },
+  fieldShouldHavePresenceError(assert, className) {
+    assert.equal(find(`.ember-modal-dialog ${className} .help-block`).text().trim(), "can't be blank!");
+  },
+  thereShouldBeNoErrors(assert) {
+    assert.equal(find('.ember-modal-dialog .help-block').length, 0);
   }
 };
 
 test('visiting /developers/new', function(assert) {
-  visit('/developers/new');
-
+  page.visit();
   andThen(function() {
     assert.equal(currentURL(), '/developers/new');
-    assert.equal(find('.ember-modal-dialog form').length, 1);
+    assert.equal(page.formTag().length, 1);
   });
 });
 
 test('the submit button should be disabled when form is not touched', function(assert) {
-  visit('/developers/new');
+  page.visit();
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog form button[type="submit"]:disabled').length, 1);
+    assertions.submitButtonShouldBeDisabled(assert);
   });
 });
 
 test('should close modal after clicking on cancel button', function(assert) {
-  visit('/developers/new');
-
+  page.visit();
   andThen(function() {
     assert.equal(currentURL(), '/developers/new');
   });
-  click('form .cancel-button');
+  page.clickCancelButton();
   andThen(function() {
     assert.equal(currentURL(), '/');
-    assert.equal(find('.ember-modal-dialog form').length, 0);
+    assert.equal(page.formTag().length, 0);
   });
 });
 
 test('the submit button should be enabled when all fields are filled', function(assert) {
-  visit('/developers/new');
-  helpers.fillAllFields();
+  page
+    .visit()
+    .fillInAllFields();
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog form button[type="submit"]:disabled').length, 0);
+    assertions.submitButtonShouldNotBeDisabled(assert);
   });
 });
 
 test('an error should be displayed when any field is blank', function(assert) {
-  visit('/developers/new');
-  fillIn('input#developer-snapchat-username', '');
-  fillIn('input#developer-full-name', 'Test');
-  fillIn('textarea#developer-about', 'Test');
+  page
+    .visit()
+    .fillInAllFields()
+    .fillInSnapchatUsername('');
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog form button[type="submit"]:disabled').length, 1);
-    assert.equal(find('.ember-modal-dialog .help-block').length, 1);
-    assert.equal(find('.ember-modal-dialog .snapchat-username-field .help-block').text().trim(), "can't be blank!");
+    assertions.submitButtonShouldBeDisabled(assert);
+    assertions.thereShouldBeOnlyOneError(assert);
+    assertions.fieldShouldHavePresenceError(assert, '.snapchat-username-field');
   });
-
-  fillIn('input#developer-snapchat-username', 'Test');
-  fillIn('input#developer-full-name', '');
-  fillIn('textarea#developer-about', 'Test');
+  page
+    .fillInAllFields()
+    .fillInFullName('');
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog form button[type="submit"]:disabled').length, 1);
-    assert.equal(find('.ember-modal-dialog .help-block').length, 1);
-    assert.equal(find('.ember-modal-dialog .fullname-field .help-block').text().trim(), "can't be blank!");
+    assertions.submitButtonShouldBeDisabled(assert);
+    assertions.thereShouldBeOnlyOneError(assert);
+    assertions.fieldShouldHavePresenceError(assert, '.fullname-field');
   });
-
-  fillIn('input#developer-snapchat-username', 'Test');
-  fillIn('input#developer-full-name', 'Test');
-  fillIn('textarea#developer-about', '');
+  page
+    .fillInAllFields()
+    .fillInAbout('');
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog form button[type="submit"]:disabled').length, 1);
-    assert.equal(find('.ember-modal-dialog .help-block').length, 1);
-    assert.equal(find('.ember-modal-dialog .about-field .help-block').text().trim(), "can't be blank!");
+    assertions.submitButtonShouldBeDisabled(assert);
+    assertions.thereShouldBeOnlyOneError(assert);
+    assertions.fieldShouldHavePresenceError(assert, '.about-field ');
   });
-  helpers.fillAllFields();
+  page.fillInAllFields();
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog form button[type="submit"]:disabled').length, 0);
-    assert.equal(find('.ember-modal-dialog .help-block').length, 0);
+    assertions.submitButtonShouldNotBeDisabled(assert);
+    assertions.thereShouldBeNoErrors(assert);
   });
 });
 
 test('after saving the form the counter should be increased', function(assert) {
   server.createList('developer', 5);
-  visit('/developers/new');
+  page.visit();
   andThen(function() {
-    assert.equal(find('.developers-count').text().trim(), 5);
+    assert.equal(page.developersCounter(), 5);
   });
-  helpers.fillAllFields();
-  click('.new-developer-form button[type="submit"]');
+  page
+    .fillInAllFields()
+    .clickSubmitButton();
   andThen(function() {
-    assert.equal(find('.developers-count').text().trim(), 6);
+    assert.equal(page.developersCounter(), 6);
   });
 });
 
 test('after saving the form the developer should be appended to the list', function(assert) {
   server.createList('developer', 5);
-  visit('/developers/new');
+  page.visit();
   andThen(function() {
-    assert.equal(find('table tbody tr').length, 5);
+    assert.equal(page.tableRows().length, 5);
   });
-  helpers.fillAllFields();
-  click('.new-developer-form button[type="submit"]');
+  page
+    .fillInAllFields()
+    .clickSubmitButton();
   andThen(function() {
-    assert.equal(find('table tbody tr').length, 6);
-    assert.equal(find('table tbody tr:last td:first').text().trim(), 'Test');
+    assert.equal(page.tableRows().length, 6);
+    assert.equal(page.lastSnapchatUsernameInTable(), 'Test');
   });
 });
 
 test('form should be reset after closing the modal', function(assert) {
-  visit('/developers/new');
-  helpers.fillAllFields();
-  click('.cancel-button');
-  visit('/developers/new');
+  page
+    .visit()
+    .fillInAllFields()
+    .clickCancelButton()
+    .visit();
   andThen(function() {
-    assert.equal(find('input#developer-snapchat-username').text().trim(), '');
-    assert.equal(find('input#developer-full-name').text().trim(), '');
-    assert.equal(find('textarea#developer-about').text().trim(), '');
+    assert.equal(page.snapchatUsername(), '');
+    assert.equal(page.fullName(), '');
+    assert.equal(page.about(), '');
   });
 });
 
