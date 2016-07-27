@@ -1,94 +1,121 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'devsnap/tests/helpers/module-for-acceptance';
+import PageObject from 'devsnap/tests/page-object';
 
-moduleForAcceptance('Acceptance | root page');
+const {
+  visitable,
+  clickable,
+  text
+} = PageObject;
 
-const helpers = {
+const page = PageObject.create({
+  visit: visitable('/'),
+
+  brandText:                    text('nav a.navbar-brand'),
+  firstSnapchatUsernameInTable: text('table tbody tr:first td:nth-child(1)'),
+  firstFullNameInTable:         text('table tbody tr:first td:nth-child(2)'),
+  firstAboutInTable:            text('table tbody tr:first td:nth-child(3)'),
+  snapchatFullNameInModal:      text('h1'),
+  snapchatUsernameInModal:      text('.ember-modal-dialog .snapchat-username'),
+  snapchatAboutInModal:         text('.ember-modal-dialog .snapchat-about'),
+  developersCounter:            text('.developers-count'),
+
+  clickOnFirstSnapchatUsername: clickable('.snapchat-username:first a'),
+  clickOnCloseButton:           clickable('.ember-modal-dialog button'),
+  clickOnModalOverlay:          clickable('.ember-modal-overlay'),
+
   createRobocop() {
     return server.create('developer', {
       fullName: 'Robo Cop',
       about: 'Pif Paf'
     });
   },
-  clickOnFirstSnapchatUsername() {
-    click('.snapchat-username:first a');
+  snapchatUsernames() {
+    return find('table tbody .snapchat-username');
+  },
+  svgTagInModal() {
+    return find('.ember-modal-dialog .snapchat-image svg');
+  },
+  modalDialog() {
+    return find('.ember-modal-dialog');
   }
-};
+});
+
+
+moduleForAcceptance('Acceptance | root page');
 
 test('visiting /', function(assert) {
-  visit('/');
-
+  page.visit();
   andThen(function() {
     assert.equal(currentURL(), '/');
-    assert.equal(find('nav a.navbar-brand').text().trim(), 'DevSnap');
+    assert.equal(page.brandText(), 'DevSnap');
   });
 });
 
 test('displaying a table with developers', function(assert) {
-  const robocop = helpers.createRobocop();
+  const robocop = page.createRobocop();
   server.createList('developer', 3);
-  visit('/');
-
+  page.visit();
   andThen(function() {
-    assert.equal(find('table tbody .snapchat-username').length, 4);
-    assert.equal(find('table tbody tr:first td:nth-child(1)').text().trim(), robocop.id);
-    assert.equal(find('table tbody tr:first td:nth-child(2)').text().trim(), 'Robo Cop');
-    assert.equal(find('table tbody tr:first td:nth-child(3)').text().trim(), 'Pif Paf');
+    assert.equal(page.snapchatUsernames().length, 4);
+    assert.equal(page.firstSnapchatUsernameInTable(), robocop.id);
+    assert.equal(page.firstFullNameInTable(), 'Robo Cop');
+    assert.equal(page.firstAboutInTable(), 'Pif Paf');
   });
 });
 
 test('opening a modal after clicking on snapchat username', function(assert) {
-  const robocop = helpers.createRobocop();
-  visit('/');
-
-  helpers.clickOnFirstSnapchatUsername();
+  const robocop = page.createRobocop();
+  page
+    .visit()
+    .clickOnFirstSnapchatUsername();
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog').length, 1);
+    assert.equal(page.modalDialog().length, 1);
     assert.equal(currentURL(), '/developers/' + robocop.id);
   });
 });
 
 test('closing a modal after clicking on close button', function(assert) {
-  helpers.createRobocop();
-  visit('/');
-
-  helpers.clickOnFirstSnapchatUsername();
-  click('.ember-modal-dialog button');
+  page.createRobocop();
+  page
+    .visit()
+    .clickOnFirstSnapchatUsername()
+    .clickOnCloseButton();
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog').length, 0);
+    assert.equal(page.modalDialog().length, 0);
     assert.equal(currentURL(), '/');
   });
 });
 
 test('closing a modal after clicking on overlay shadow', function(assert) {
-  helpers.createRobocop();
-  visit('/');
-
-  helpers.clickOnFirstSnapchatUsername();
-  click('.ember-modal-overlay');
+  page.createRobocop();
+  page
+    .visit()
+    .clickOnFirstSnapchatUsername()
+    .clickOnModalOverlay();
   andThen(function() {
-    assert.equal(find('.ember-modal-dialog').length, 0);
+    assert.equal(page.modalDialog().length, 0);
     assert.equal(currentURL(), '/');
   });
 });
 
 test('if modal contains fullname, snapchat image, about and snapchat username', function(assert) {
-  const robocop = helpers.createRobocop();
-  visit('/');
-
-  helpers.clickOnFirstSnapchatUsername();
+  const robocop = page.createRobocop();
+  page
+    .visit()
+    .clickOnFirstSnapchatUsername();
   andThen(function() {
-    assert.equal(find('h1').text().trim(), robocop.fullName);
-    assert.equal(find('.ember-modal-dialog .snapchat-image svg').length, 1);
-    assert.equal(find('.ember-modal-dialog .snapchat-username').text().trim(), robocop.id);
-    assert.equal(find('.ember-modal-dialog .snapchat-about').text().trim(), robocop.about);
+    assert.equal(page.snapchatFullNameInModal(), robocop.fullName);
+    assert.equal(page.svgTagInModal().length, 1);
+    assert.equal(page.snapchatUsernameInModal(), robocop.id);
+    assert.equal(page.snapchatAboutInModal(), robocop.about);
   });
 });
 
 test('developers counter in top navigation', function(assert) {
   server.createList('developer', 4);
-  visit('/');
+  page.visit();
   andThen(function() {
-    assert.equal(find('.developers-count').text().trim(), '4');
+    assert.equal(page.developersCounter(), '4');
   });
 });
