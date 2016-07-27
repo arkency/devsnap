@@ -1,15 +1,13 @@
 class JsonApiFormFactory
-  InvalidDataStructure = Class.new(StandardError)
+  InvalidPayload = Class.new(StandardError)
 
   def self.build(form_klass, params)
     form_klass.new(
-      params
-        .fetch(:data).fetch(:attributes)
-        .transform_keys { |key| key.to_s.underscore }
-        .merge(id: params.dig(:data, :id))
-        .with_indifferent_access
+      ActiveModelSerializers::Deserialization.jsonapi_parse!(
+        params.with_indifferent_access
+      )
     )
-  rescue KeyError => e
-    raise InvalidDataStructure.new(e.message)
+  rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument
+    raise InvalidPayload
   end
 end

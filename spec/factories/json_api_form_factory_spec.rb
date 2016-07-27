@@ -11,19 +11,28 @@ RSpec.describe JsonApiFormFactory do
   end
 
   describe '.build' do
-    it 'builds form object with params extracted from JSONApi data structure' do
-      json_api_params = {
-        data: {
-          attributes: {
-            'first-param': 'Foo',
-            'second-param': 'Bar'
+    context 'when data structure is valid' do
+      it 'builds form object with params extracted from JSONApi data structure' do
+        json_api_params = {
+          data: {
+            attributes: {
+              'first-param': 'Foo',
+              'second-param': 'Bar'
+            }
           }
         }
-      }
 
-      form = described_class.build(FakeForm, json_api_params)
-      expect(form.first_param).to eq 'Foo'
-      expect(form.second_param).to eq 'Bar'
+        form = described_class.build(FakeForm, json_api_params)
+        expect(form.first_param).to eq 'Foo'
+        expect(form.second_param).to eq 'Bar'
+      end
+    end
+    context 'when `data` key is missing' do
+      it 'raises an exception' do
+        expect do
+          described_class.build(FakeForm, {})
+        end.to raise_error described_class::InvalidPayload
+      end
     end
   end
 end

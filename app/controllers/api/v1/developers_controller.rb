@@ -24,8 +24,8 @@ module Api
           :unprocessable_entity,
           { id: 'snapchat-username' }
         )
-      rescue JsonApiFormFactory::InvalidDataStructure => e
-        render_error(e.message, :unprocessable_entity)
+      rescue JsonApiFormFactory::InvalidPayload
+        render_error('Invalid payload', :unprocessable_entity)
       end
 
       def show
