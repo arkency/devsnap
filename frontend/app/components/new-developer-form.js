@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   classNames: ['new-developer-form'],
   form: {},
   errors: {},
+  touchedFields: {},
   didReceiveAttrs() {
     this._setInitialState();
   },
@@ -42,6 +43,10 @@ export default Ember.Component.extend({
         this._handleErrorsFromApi(response.errors);
         this.set('submitting', false);
       });
+    },
+    handleFieldValueUpdated(fieldName, value) {
+      this.set(`form.${fieldName}`, value);
+      this._markFieldAsTouched(fieldName);
     }
   },
   _setInitialState() {
@@ -83,23 +88,33 @@ export default Ember.Component.extend({
       return;
     }
     if(this.get('store').peekRecord('developer', this.get('form.snapchatUsername'))) {
-      this.set('errors.snapchatUsername', 'This snapchat username is already on the list.');
+      this._setFieldError('snapchatUsername', 'This snapchat username is already on the list.');
     } else {
-      this.set('errors.snapchatUsername', null);
+      this._setFieldError('snapchatUsername', null);
     }
   },
   _validatePresenceOf(fieldName) {
     if(this.get(`form.${fieldName}.length`) === 0) {
-      this.set(`errors.${fieldName}`, "can't be blank!");
+      this._setFieldError(fieldName, "can't be blank!");
     }
   },
   _eachFieldIsTouched: Ember.computed('form.{snapchatUsername,fullName,about}', function() {
-    return this._fieldValuesArray().find((v) => { return v === null; }) === undefined;
+    return this._fieldNames().find((fieldName) => {
+      return !this._isFieldTouched(fieldName);
+    }) === undefined;
   }),
+  _isFieldTouched(fieldName) {
+    return this.get(`touchedFields.${fieldName}`);
+  },
   _resetForm() {
     this._fieldNames().forEach((fieldName) => {
       this.set(`form.${fieldName}`, null);
     });
+  },
+  _setFieldError(fieldName, message) {
+    if(this._isFieldTouched(fieldName)) {
+      this.set(`errors.${fieldName}`, message);
+    }
   },
   _fieldValuesArray() {
     return this._fieldNames().map((fieldName) => {
@@ -126,5 +141,8 @@ export default Ember.Component.extend({
       }
     });
     this.set('apiErrors', other_errors);
+  },
+  _markFieldAsTouched(fieldName) {
+    this.set(`touchedFields.${fieldName}`, true);
   }
 });
