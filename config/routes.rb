@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  root to: "developers#index"
-  resources :developers, only: [:index, :create, :new]
-  get '/codes', to: 'developers#codes_index', as: 'codes_index'
+  namespace :api do
+    namespace :v1, defaults: { version: '1', format: 'json' } do
+      resources :developers, only: [:index, :create, :show]
+    end
+  end
+  mount_ember_app :frontend, to: "/"
 end

@@ -1,0 +1,7 @@
+<div class="container-fluid">
+  <div class="row">
+    {{#each developers key="id" as |developer|}}
+      {{snapcode-image-with-random-color developer=developer}}
+    {{/each}}
+  </div>
+</div>

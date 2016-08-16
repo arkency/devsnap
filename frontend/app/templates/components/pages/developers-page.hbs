@@ -1,0 +1,13 @@
+{{flash-message message=notification onClose=(action 'onCloseNotificationHandler')}}
+{{#if firstBatchOfDevelopersIsLoaded}}
+  {{developers-list developers=developers}}
+  {{#unless allDevelopersAreLoaded}}
+    {{#infinity-loader triggerOffset=300}}
+      {{loading-spinner}}
+    {{/infinity-loader}}
+  {{/unless}}
+{{else}}
+  {{loading-spinner}}
+{{/if}}
+
+{{outlet}}

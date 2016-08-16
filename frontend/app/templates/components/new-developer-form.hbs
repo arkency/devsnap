@@ -1,0 +1,65 @@
+<form {{action 'submitForm' on="submit"}}>
+  {{#if apiErrors}}
+    <div class="api-errors">
+      {{#each apiErrors as |error|}}
+        {{display-error error=error.title}}
+      {{/each}}
+    </div>
+  {{/if}}
+  <div class="card card-block">
+    <div class="field snapchat-username-field">
+      <div class="form-group {{if errors.snapchatUsername 'has-danger'}}">
+        <label class="control-label required" for="developer-snapchat-username">Snapchat username</label>
+        {{#auto-focus}}
+          {{one-way-input form.snapchatUsername
+                  update=(action 'handleFieldValueUpdated' 'snapchatUsername')
+                  placeholder="anakin_skywalker"
+                  class="form-control form-control-danger"
+                  type="text"
+                  id="developer-snapchat-username"
+          }}
+        {{/auto-focus}}
+        {{display-error error=errors.snapchatUsername}}
+      </div>
+    </div>
+
+    <div class="field fullname-field">
+      <div class="form-group {{if errors.fullName 'has-danger'}}">
+        <label class="control-label required" for="developer-full-name">Full name</label>
+        {{one-way-input form.fullName
+                update=(action 'handleFieldValueUpdated' 'fullName')
+                placeholder="Han Solo"
+                class="form-control form-control-danger"
+                type="text"
+                id="developer-full-name"
+        }}
+        {{display-error error=errors.fullName}}
+      </div>
+    </div>
+
+    <div class="field about-field">
+      <div class="form-group {{if errors.about 'has-danger'}}">
+        <label class="control-label required" for="developer-about">About</label>
+        {{one-way-textarea form.about
+                  update=(action 'handleFieldValueUpdated' 'about')
+                  rows="5"
+                  placeholder="Anything that best describes you as a developer. Give your best shot."
+                  class="form-control form-control-danger"
+                  id="developer-about"
+        }}
+        {{display-error error=errors.about}}
+      </div>
+    </div>
+
+    <div class="actions">
+      {{#if submitting}}
+        {{loading-spinner}}
+      {{else}}
+        <button type="submit" name="commit" class="btn btn-primary-outline" disabled={{formInvalid}}>OK. Add me!</button>
+        <button type="button" class="btn btn-danger-outline cancel-button" data-dismiss="modal" {{action 'clickedCancelButton'}}>
+          No, take me back.
+        </button>
+      {{/if}}
+    </div>
+  </div>
+</form>

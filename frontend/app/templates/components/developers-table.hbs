@@ -1,0 +1,25 @@
+<table class="table table-striped responsive-developers-table">
+  <thead>
+  <tr>
+    <th>Snapchat username</th>
+    <th>Full name</th>
+    <th>About</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  {{#each developers key="id" as |developer|}}
+    <tr>
+      <td>
+        <span class="snapchat-username">
+          {{#link-to 'developers.show' developer.id}}
+            {{developer.id}}
+          {{/link-to}}
+        </span>
+      </td>
+      <td>{{developer.fullName}}</td>
+      <td>{{developer.about}}</td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>

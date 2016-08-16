@@ -1,0 +1,18 @@
+{{#modal-dialog close='goBackToDevelopers' translucentOverlay=true container-class="new-developer-modal"}}
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" {{action 'goBackToDevelopers'}}>
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h1 class="modal-title" id="gridModalLabel">I want to be part of this!</h1>
+      </div>
+      <div class="modal-body">
+        {{new-developer-form onClickCancelButton=(action 'goBackToDevelopers')
+                             onSubmit=(action 'onSubmitHandler')
+                             onSave=(action 'onSaveHandler')
+        }}
+      </div>
+    </div>
+  </div>
+{{/modal-dialog}}
